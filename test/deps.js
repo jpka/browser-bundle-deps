@@ -5,7 +5,8 @@ var fs = require('fs');
 var files = {
     main: __dirname + '/files/main.js',
     foo: __dirname + '/files/foo.js',
-    bar: __dirname + '/files/bar.js'
+    bar: __dirname + '/files/bar.js',
+    baz: __dirname + '/files/baz.js'
 };
 
 var sources = Object.keys(files).reduce(function (acc, file) {
@@ -25,17 +26,29 @@ test('deps', function (t) {
                 id: files.main,
                 source: sources.main,
                 entry: true,
-                deps: { './foo': files.foo }
+                format: 'amd',
+                deps: { './baz': files.baz }
             },
             {
-                id: files.foo,
-                source: sources.foo,
-                deps: { './bar': files.bar }
+                id: files.baz,
+                source: sources.baz,
+                format: 'amd',
+                deps: { 
+                  './bar': files.bar,
+                  './foo': files.foo
+                }
             },
             {
                 id: files.bar,
                 source: sources.bar,
+                format: 'commonJS',
                 deps: {}
+            },
+            {
+                id: files.foo,
+                source: sources.foo,
+                format: 'commonJS',
+                deps: { './bar': files.bar }
             }
         ]);
     });

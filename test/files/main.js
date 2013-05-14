@@ -1,2 +1,3 @@
-var foo = require('./foo');
-console.log('main: ' + foo(5));
+define(["./baz"], function(foo) {
+    console.log('main: ' + foo(5));
+});

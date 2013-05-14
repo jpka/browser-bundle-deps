@@ -1,32 +1,30 @@
 {
-  "name": "module-deps",
-  "version": "0.7.1",
-  "description": "walk the dependency graph to generate json output that can be fed into browser-pack",
+  "name": "browser-bundle-deps",
+  "version": "0.0.1",
+  "description": "walk the dependency graph of a browser bundle entry file and return it as a json stream. Supports both AMD and CommonJS (node-style) modules.",
   "main": "index.js",
   "bin": {
-    "module-deps": "cmd.js"
+    "browser-bundle-deps": "cmd.js"
   },
   "dependencies": {
     "through": "~2.3.2",
     "JSONStream": "~0.4.3",
-    "browser-resolve": "~0.1.0",
     "resolve": "~0.3.0",
-    "detective": "~2.1.1",
     "concat-stream": "~0.1.1",
-    "module-investigator": "~0.1.2"
+    "module-investigator": "~0.1.2",
+    "browser-resolve": "~1.0.1"
   },
   "devDependencies": {
-    "tap": "~0.4.0",
-    "browser-pack": "~0.0.0"
+    "tap": "~0.4.0"
   },
   "scripts": {
     "test": "tap test/*.js"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/substack/module-deps.git"
+    "url": "git://github.com/jpka/browser-bundle-deps.git"
   },
-  "homepage": "https://github.com/substack/module-deps",
+  "homepage": "https://github.com/jpka/browser-bundle-deps",
   "keywords": [
     "dependency",
     "graph",
@@ -34,12 +32,24 @@
     "require",
     "module",
     "exports",
-    "json"
+    "json",
+    "amd",
+    "commonjs"
   ],
-  "author": {
-    "name": "James Halliday",
-    "email": "mail@substack.net",
-    "url": "http://substack.net"
-  },
+  "authors": [
+    {
+      "name": "James Halliday",
+      "email": "mail@substack.net",
+      "url": "http://substack.net"
+    },
+    {
+      "name": "Juan Pablo Kaniefsky",
+      "email": "jpkaniefsky@gmail.com"
+    }
+  ],
+  "maintainers": [{
+    "name": "Juan Pablo Kaniefsky",
+    "email": "jpkaniefsky@gmail.com"
+  }],
   "license": "MIT"
 }

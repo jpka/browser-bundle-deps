@@ -4,7 +4,6 @@ var spawn = require('child_process').spawn;
 
 var browserResolve = require('browser-resolve');
 var nodeResolve = require('resolve');
-var detective = require('detective');
 var investigator = require('module-investigator');
 var through = require('through');
 var concatStream = require('concat-stream');
@@ -106,14 +105,9 @@ module.exports = function (mains, opts) {
         }
         else {
             try { 
-                if (opts.amdMode) {
-                    info = investigator(src);
-                    format = info.dependencies.amd.length ? 'amd' : 'commonJS';
-                    deps = info.dependencies[format];
-                }
-                else {
-                  deps = detective(src);
-                }
+                info = investigator(src);
+                format = info.dependencies.amd.length ? 'amd' : 'commonJS';
+                deps = info.dependencies[format];
             }
             catch (ex) {
                 var message = ex && ex.message ? ex.message : ex;
@@ -144,11 +138,9 @@ module.exports = function (mains, opts) {
             var rec = {
                 id: file,
                 source: src,
+                format: format,
                 deps: resolved
             };
-            if (opts.amdMode) {
-              rec.format = format;
-            }
             if (mains.indexOf(file) >= 0) {
                 rec.entry = true;
             }
